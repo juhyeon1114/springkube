@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springkube-app
+  namespace: springkube
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 # 한번에 하나씩 업데이트
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: springkube-app
+  template:
+    metadata:
+      labels:
+        app: springkube-app
+    spec:
+      containers:
+        - name: springkube
+          image: kai1114/springkube:0.0.2
