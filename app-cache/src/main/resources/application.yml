@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: springkube-cache
+  lifecycle:
+    timeout-per-shutdown-phase: 50s
+server:
+  shutdown: graceful
