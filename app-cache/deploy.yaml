@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springkube-cache-app
+  namespace: springkube
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1 # 한번에 하나씩 업데이트
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: springkube-cache-app
+  template:
+    metadata:
+      labels:
+        app: springkube-cache-app
+    spec:
+      terminationGracePeriodSeconds: 60 # 30이 기본 값
+      containers:
+        - name: springkube-cache
+          image: kai1114/springkube-cache:0.0.1
+          imagePullPolicy: Always # 컨테이너가 뜰 때 마다 이미지를 받아서 실행 (개발할 때만 사용하는 것 권장)
+          env:
+            - name: LANGUAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: language
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: api-key
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sh", "-c", "sleep 10" ] # 10초 후, SIGTERM 전달
+          readinessProbe:
+            httpGet:
+              path: /probe/health
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 1
+            failureThreshold: 3
+            successThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /probe/health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 1
+            failureThreshold: 5

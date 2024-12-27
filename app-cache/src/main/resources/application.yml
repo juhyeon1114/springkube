@@ -5,3 +5,7 @@ spring:
     timeout-per-shutdown-phase: 50s
 server:
   shutdown: graceful
+
+appProperty:
+  language: ${LANGUAGE:ko} # 기본값 ko
+  apiKey: ${API_KEY}

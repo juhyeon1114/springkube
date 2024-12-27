@@ -10,21 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/probe")
 public class HealthCheckController {
 
-    @GetMapping("/startup")
-    public String startup() {
-        log.info("startup");
-        return "OK";
-    }
-
-    @GetMapping("/ready")
-    public String ready() {
-        log.info("ready");
-        return "OK";
-    }
-
-    @GetMapping("/live")
-    public String live() {
-        log.info("live");
+    @GetMapping("/health")
+    public String health() {
+        log.info("health");
         return "OK";
     }
 
