@@ -5,46 +5,39 @@ plugins {
     id 'com.google.cloud.tools.jib' version '3.4.4'
 }
 
-group = 'study'
-version = '0.0.1-SNAPSHOT'
+allprojects  {
+    group = 'study'
+    version = '1.0.0'
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+    repositories {
+        mavenCentral()
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'com.google.cloud.tools.jib'
 
-repositories {
-    mavenCentral()
-}
+    sourceCompatibility = '21'
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
 
-jib {
-    from {
-        image = 'openjdk:21'
+    tasks.named('test') {
+        useJUnitPlatform()
     }
-    to {
-        image = "kai1114/springkube"
-        tags = ['latest', '0.0.3']
-    }
-    container {
-        creationTime = 'USE_CURRENT_TIMESTAMP'
-    }
+
 }

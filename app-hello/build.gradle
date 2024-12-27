@@ -1,0 +1,18 @@
+plugins {
+}
+
+dependencies {
+}
+
+jib {
+    from {
+        image = 'openjdk:21'
+    }
+    to {
+        image = "kai1114/springkube"
+        tags = ['latest', '0.0.3']
+    }
+    container {
+        creationTime = 'USE_CURRENT_TIMESTAMP'
+    }
+}

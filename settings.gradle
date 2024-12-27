@@ -1,1 +1,3 @@
 rootProject.name = 'springkube'
+include 'app-hello'
+include 'app-cache'
