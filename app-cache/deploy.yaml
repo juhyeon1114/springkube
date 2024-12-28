@@ -21,7 +21,7 @@ spec:
       terminationGracePeriodSeconds: 60 # 30이 기본 값
       containers:
         - name: springkube-cache
-          image: kai1114/springkube-cache:0.0.1
+          image: kai1114/springkube-cache:0.0.3
           imagePullPolicy: Always # 컨테이너가 뜰 때 마다 이미지를 받아서 실행 (개발할 때만 사용하는 것 권장)
           env:
             - name: LANGUAGE
