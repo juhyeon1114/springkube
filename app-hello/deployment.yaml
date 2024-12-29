@@ -21,7 +21,15 @@ spec:
       terminationGracePeriodSeconds: 60 # 30이 기본 값
       containers:
         - name: springkube
-          image: kai1114/springkube:0.0.3
+          image: kai1114/springkube:0.0.4
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "1000m" # 1코어
+            limits:
+              memory: "1Gi"
+              cpu: "1500m" # 1.5코어
           lifecycle:
             preStop:
               exec:
@@ -30,21 +38,21 @@ spec:
             httpGet:
               path: /probe/startup
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 45
             periodSeconds: 1
             failureThreshold: 10
           readinessProbe:
             httpGet:
               path: /probe/ready
               port: 8080
-            initialDelaySeconds: 20 # startup와 무관하게 컨테이너 실행 시점부터 20초 후부터 체크
+            initialDelaySeconds: 45 # startup와 무관하게 컨테이너 실행 시점부터 20초 후부터 체크
             periodSeconds: 1
-            failureThreshold: 3
             successThreshold: 2
+            failureThreshold: 3
           livenessProbe:
             httpGet:
               path: /probe/live
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 45
             periodSeconds: 1
-            failureThreshold: 5
+            failureThreshold: 3

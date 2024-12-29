@@ -12,9 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hello")
 public class HelloController {
 
+    private void delay(int ms) {
+        long elapsedTime;
+        long startTime = System.currentTimeMillis();
+        do {
+            elapsedTime = System.currentTimeMillis() - startTime;
+        } while (elapsedTime < ms);
+    }
+
     @GetMapping
     public String helloName(@RequestParam("name") String name) {
         log.info("name: {}", name);
+        delay(500);
         return Objects.nonNull(name)
                 ? "Hello, " + name + "!"
                 : "Hello, World!";

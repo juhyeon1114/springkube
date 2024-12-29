@@ -5,3 +5,6 @@ spring:
     timeout-per-shutdown-phase: 50s
 server:
   shutdown: graceful
+  tomcat:
+    threads:
+      max: 10 # 부하테스트를 위해서 쓰레드 수를 10개로 제한
