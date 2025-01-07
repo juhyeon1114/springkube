@@ -21,7 +21,7 @@ spec:
       terminationGracePeriodSeconds: 60 # 30이 기본 값
       containers:
         - name: springkube
-          image: kai1114/springkube:0.0.5
+          image: kai1114/springkube:0.0.6
           imagePullPolicy: Always
           resources:
             requests:

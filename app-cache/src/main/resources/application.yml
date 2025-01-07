@@ -3,9 +3,12 @@ spring:
     name: springkube-cache
   lifecycle:
     timeout-per-shutdown-phase: 50s
+  data:
+    redis:
+      host: redis-service.default.svc.cluster.local
+      port: 6379
 server:
   shutdown: graceful
-
 appProperty:
   language: ${LANGUAGE:ko} # 기본값 ko
   apiKey: ${API_KEY}

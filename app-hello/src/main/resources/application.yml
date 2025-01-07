@@ -3,8 +3,12 @@ spring:
     name: springkube
   lifecycle:
     timeout-per-shutdown-phase: 50s
+  data:
+    redis:
+      host: redis-service.default.svc.cluster.local
+      port: 6379
 server:
   shutdown: graceful
-  tomcat:
-    threads:
-      max: 10 # 부하테스트를 위해서 쓰레드 수를 10개로 제한
+#  tomcat:
+#    threads:
+#      max: 10 # 부하테스트를 위해서 쓰레드 수를 10개로 제한
