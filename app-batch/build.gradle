@@ -1,0 +1,22 @@
+plugins {
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    runtimeOnly 'com.h2database:h2'
+
+    testImplementation 'org.springframework.batch:spring-batch-test'
+}
+
+jib {
+    from {
+        image = 'openjdk:21'
+    }
+    to {
+        image = "kai1114/springkube-batch"
+        tags = ['latest', '0.0.1']
+    }
+    container {
+        creationTime = 'USE_CURRENT_TIMESTAMP'
+    }
+}
