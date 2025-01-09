@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello-batch
+  namespace: springkube
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      parallelism: 2
+      completions: 2
+      backoffLimit: 2
+      ttlSecondsAfterFinished: 10 # 작업 후, 10초 후 Pod 정리
+      template:
+        spec:
+          containers:
+            - name: hello-batch
+              image: kai1114/springkube-batch:0.0.1
+              imagePullPolicy: Always
+          restartPolicy: Never

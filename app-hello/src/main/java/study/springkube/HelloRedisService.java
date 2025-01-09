@@ -14,7 +14,10 @@ public class HelloRedisService {
 
     private final StringRedisTemplate stringRedisTemplate;
 
-    @Scheduled(fixedDelay = 1000L)
+    /**
+     * Batch로 대체
+     */
+//    @Scheduled(fixedDelay = 1000L)
     public void dequeueHello() {
         if (!stringRedisTemplate.hasKey("hello:task-queue")) {
             log.info("No task in queue");
