@@ -1,0 +1,32 @@
+replicaCount: 2
+image:
+  repository: kai1114/springkube
+  pullPolicy: IfNotPresent
+  tag: "0.0.7"
+
+imagePullSecrets: [ ]
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount:
+  create: false
+  automount: true
+  annotations: { }
+  name: ""
+podAnnotations: { }
+podLabels: { }
+podSecurityContext: { }
+securityContext: { }
+service:
+  type: ClusterIP
+  port: 8080
+ingress:
+  enabled: false
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "1000m"
+  limits:
+    memory: "1Gi"
+    cpu: "1500m"
+autoscaling:
+  enabled: false
