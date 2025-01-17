@@ -11,7 +11,7 @@ jib {
     }
     to {
         image = "kai1114/springkube"
-        tags = ['latest', '0.0.7']
+        tags = ['latest', '0.0.8']
     }
     container {
         creationTime = 'USE_CURRENT_TIMESTAMP'

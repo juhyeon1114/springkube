@@ -12,3 +12,7 @@ server:
 #  tomcat:
 #    threads:
 #      max: 10 # 부하테스트를 위해서 쓰레드 수를 10개로 제한
+
+logging:
+  file:
+    name: /var/log/app/app-hello.log
